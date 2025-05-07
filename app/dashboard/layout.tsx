@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { useAuth } from "@/lib/auth-context";
+import { useAuthStore } from "@/lib/stores/auth-store";
 import { Button } from "@/components/ui/button";
 
 export default function DashboardLayout({
@@ -11,7 +11,7 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, logout } = useAuthStore();
   const router = useRouter();
 
   // Redirect to login if not authenticated
@@ -54,9 +54,9 @@ export default function DashboardLayout({
               </p>
             </div>
             <Button
-              variant="outline"
+              variant="destructive"
               size="sm"
-              className="text-white border-white hover:bg-yellow-700"
+              className="font-medium hover:bg-red-700"
               onClick={handleLogout}
             >
               Logout

@@ -3,15 +3,15 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { toast } from "sonner";
-import { useBank } from "@/lib/bank-context";
-import { useAuth } from "@/lib/auth-context";
+import { useBankStore } from "@/lib/stores/bank-store";
+import { useAuthStore } from "@/lib/stores/auth-store";
 import { formatCurrency } from "@/lib/utils";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 export default function DashboardPage() {
-  const { accounts, fetchAccounts, isLoading, error } = useBank();
-  const { user } = useAuth();
+  const { accounts, fetchAccounts, isLoading, error } = useBankStore();
+  const { user } = useAuthStore();
   const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {

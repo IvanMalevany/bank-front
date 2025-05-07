@@ -9,6 +9,9 @@ type AccountSummaryCardProps = {
 };
 
 export function AccountSummaryCard({ accountSummary }: AccountSummaryCardProps) {
+  // Calculate net flow manually since it's not provided by the backend
+  const netFlow = accountSummary.statistics.totalIncome - accountSummary.statistics.totalExpenses;
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <Card>
@@ -34,8 +37,8 @@ export function AccountSummaryCard({ accountSummary }: AccountSummaryCardProps) 
             </div>
             <div>
               <h4 className="text-sm font-medium text-muted-foreground mb-1">Net Flow</h4>
-              <p className={`text-lg font-semibold ${accountSummary.statistics.netFlow >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                {formatCurrency(accountSummary.statistics.netFlow)}
+              <p className={`text-lg font-semibold ${netFlow >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                {formatCurrency(netFlow)}
               </p>
             </div>
           </div>
@@ -67,8 +70,8 @@ export function AccountSummaryCard({ accountSummary }: AccountSummaryCardProps) 
                 {accountSummary.statistics.monthlyBalances.map((item, index) => (
                   <div key={index} className="flex items-center justify-between">
                     <span className="text-sm">{item.month}</span>
-                    <span className={`text-sm font-medium ${item.balance >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                      {formatCurrency(item.balance)}
+                    <span className={`text-sm font-medium ${item.netChange >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                      {formatCurrency(item.netChange)}
                     </span>
                   </div>
                 ))}

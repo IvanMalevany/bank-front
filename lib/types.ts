@@ -45,7 +45,9 @@ export interface AccountSummary extends Account {
     netFlow: number;
     monthlyBalances: {
       month: string;
-      balance: number;
+      income: number;
+      expenses: number;
+      netChange: number;
     }[];
   };
 }

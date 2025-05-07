@@ -10,7 +10,7 @@ import { AccountSummaryCard } from "@/components/account-summary";
 import { TransactionsTable } from "@/components/transactions-table";
 import { TransactionFiltersDialog } from "@/components/transaction-filters";
 import { TransactionForm } from "@/components/transaction-form";
-import { useBank } from "@/lib/bank-context";
+import { useBankStore } from "@/lib/stores/bank-store";
 import { TransactionFilters, TransactionFormData } from "@/lib/types";
 
 export default function AccountDetailPage() {
@@ -30,7 +30,7 @@ export default function AccountDetailPage() {
     fetchAccountSummary,
     createTransaction,
     selectAccount
-  } = useBank();
+  } = useBankStore();
 
   const [currentFilters, setCurrentFilters] = useState<TransactionFilters>({
     sortBy: "date",

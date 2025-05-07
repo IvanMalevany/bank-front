@@ -8,8 +8,8 @@ This is the frontend application for BeeBank, a modern banking dashboard web app
 - **Language**: TypeScript
 - **UI Components**: shadcn/ui
 - **Styling**: Tailwind CSS
-- **State Management**: React Context API
-- **Form Management**: React forms with validation
+- **State Management**: Zustand (with persist middleware for auth)
+- **Form Management**: React Hook Form with Zod validation
 - **Toast Notifications**: Sonner
 
 ## Features
@@ -30,12 +30,13 @@ This is the frontend application for BeeBank, a modern banking dashboard web app
 - `/components`: Reusable UI components
   - UI components from shadcn/ui
   - Custom components for the application
-- `/lib`: Utility functions and app-wide providers
-  - API Service
-  - Auth Context
-  - Bank Context
-  - TypeScript type definitions
-  - Utility functions
+- `/lib`: Utility functions and stores
+  - `/stores`: Zustand stores
+    - `auth-store.ts`: Authentication state management
+    - `bank-store.ts`: Banking data state management
+  - `api.ts`: API service
+  - `types.ts`: TypeScript type definitions
+  - `utils.ts`: Utility functions
 
 ## Getting Started
 
@@ -66,7 +67,15 @@ yarn dev
 
 ### Backend Connection
 
-The frontend is configured to connect to the backend API at `http://localhost:3001`. Make sure the backend server is running before using the application.
+The frontend is configured to connect to the backend API using environment variables. By default, it will connect to `http://localhost:3001`. 
+
+#### Environment Variables
+
+You can customize the API URL by creating a `.env.local` file in the frontend directory:
+
+```
+NEXT_PUBLIC_API_URL=https://bank-back-lake.vercel.app
+```
 
 ## Usage
 
@@ -89,13 +98,37 @@ The account details page shows:
 - Transaction filtering options
 - Add new transaction form
 
-## Assumptions and Tradeoffs
+## Benefits of Zustand
 
-- Used React Context for state management instead of more complex solutions like Redux
-- Authentication is handled with a simple token-based approach (JWT)
-- Used basic form validation for simplicity
-- Leveraged shadcn/ui components for faster development and better consistency
+- Simple and unopinionated state management
+- Minimal boilerplate compared to other solutions
+- Easy integration with React hooks
+- Built-in persistence (localStorage) for auth state
+- Efficient re-rendering with automatic memoization
+- TypeScript support out of the box
 
 ## Notes
 
 This application is designed as a demonstration of frontend development skills and is not intended for production use with real financial data.
+
+## Deployment
+
+### Deploying to Vercel
+
+This project is configured for easy deployment to Vercel. Follow these steps:
+
+1. **Connect with Vercel**
+   - Go to [Vercel](https://vercel.com) and sign in or create an account
+   - Create a new project and import your GitHub repository
+
+2. **Configure the project**
+   - All necessary configuration is already included in `vercel.json`
+   - The environment variables are pre-configured
+
+3. **Deploy**
+   - Click "Deploy" and Vercel will automatically build and deploy your application
+   - Once deployed, you'll receive a URL for your live application
+
+### Environment Variables
+
+The deployment automatically uses the API endpoint: `https://bank-back-lake.vercel.app`
