@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BeeBank Frontend
+
+This is the frontend application for BeeBank, a modern banking dashboard web application.
+
+## Tech Stack
+
+- **Framework**: Next.js 14 with App Router
+- **Language**: TypeScript
+- **UI Components**: shadcn/ui
+- **Styling**: Tailwind CSS
+- **State Management**: React Context API
+- **Form Management**: React forms with validation
+- **Toast Notifications**: Sonner
+
+## Features
+
+- User authentication (login)
+- Dashboard with account listings
+- Account details with transaction history
+- Transaction filtering and sorting
+- Add new transactions
+- Responsive design (mobile-friendly)
+
+## Project Structure
+
+- `/app`: Next.js application routes
+  - `/dashboard`: Main dashboard page
+  - `/dashboard/account/[id]`: Account details page
+  - `/login`: Authentication page
+- `/components`: Reusable UI components
+  - UI components from shadcn/ui
+  - Custom components for the application
+- `/lib`: Utility functions and app-wide providers
+  - API Service
+  - Auth Context
+  - Bank Context
+  - TypeScript type definitions
+  - Utility functions
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+1. Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+2. Start the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Backend Connection
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The frontend is configured to connect to the backend API at `http://localhost:3001`. Make sure the backend server is running before using the application.
 
-## Learn More
+## Usage
 
-To learn more about Next.js, take a look at the following resources:
+### Login
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Use the following demo credentials to log in:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Username: `demo`
+- Password: `password123`
 
-## Deploy on Vercel
+### Dashboard
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The dashboard displays all your bank accounts. Click on an account to view its details.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Account Details
+
+The account details page shows:
+- Account summary with balance and statistics
+- Transaction history
+- Transaction filtering options
+- Add new transaction form
+
+## Assumptions and Tradeoffs
+
+- Used React Context for state management instead of more complex solutions like Redux
+- Authentication is handled with a simple token-based approach (JWT)
+- Used basic form validation for simplicity
+- Leveraged shadcn/ui components for faster development and better consistency
+
+## Notes
+
+This application is designed as a demonstration of frontend development skills and is not intended for production use with real financial data.
