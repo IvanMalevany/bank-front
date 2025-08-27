@@ -10,7 +10,6 @@ export default function Home() {
   const { isAuthenticated, isLoading } = useAuthStore();
   
   useEffect(() => {
-    // If authenticated, go to dashboard, otherwise go to login
     if (!isLoading) {
       if (isAuthenticated) {
         router.push("/dashboard");

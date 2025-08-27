@@ -21,7 +21,6 @@ export function TransactionForm({ accounts, selectedAccount, onAddTransaction }:
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   
-  // Form state
   const [type, setType] = useState<TransactionType>("expense");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState(getInputDateString());
@@ -29,11 +28,9 @@ export function TransactionForm({ accounts, selectedAccount, onAddTransaction }:
   const [receiver, setReceiver] = useState("");
   const [message, setMessage] = useState("");
 
-  // Update form fields when type changes
   const handleTypeChange = (newType: TransactionType) => {
     setType(newType);
     
-    // Auto-fill sender/receiver based on transaction type
     if (newType === "expense") {
       setSender(selectedAccount.name);
       setReceiver("");
@@ -42,13 +39,11 @@ export function TransactionForm({ accounts, selectedAccount, onAddTransaction }:
       setReceiver(selectedAccount.name);
     } else if (newType === "transfer") {
       setSender(selectedAccount.name);
-      // If there are other accounts, default to first one that's not the current account
       const otherAccount = accounts.find(acc => acc.id !== selectedAccount.id);
       setReceiver(otherAccount ? otherAccount.name : "");
     }
   };
 
-  // Reset the form to default values
   const resetForm = () => {
     setType("expense");
     setAmount("");
@@ -58,11 +53,9 @@ export function TransactionForm({ accounts, selectedAccount, onAddTransaction }:
     setMessage("");
   };
 
-  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate required fields
     if (!amount || parseFloat(amount) <= 0) {
       toast.error("Please enter a valid amount");
       return;
@@ -83,7 +76,6 @@ export function TransactionForm({ accounts, selectedAccount, onAddTransaction }:
       return;
     }
     
-    // Create transaction data
     const data: TransactionFormData = {
       accountId: selectedAccount.id,
       amount: parseFloat(amount),
@@ -112,7 +104,6 @@ export function TransactionForm({ accounts, selectedAccount, onAddTransaction }:
     <Dialog open={open} onOpenChange={(newOpen) => {
       setOpen(newOpen);
       if (newOpen) {
-        // Reset form when opening dialog
         resetForm();
       }
     }}>

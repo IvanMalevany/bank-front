@@ -10,14 +10,12 @@ interface BankState {
   isLoading: boolean;
   error: string | null;
   
-  // Actions
   fetchAccounts: () => Promise<void>;
   fetchTransactions: (accountId: string, filters?: TransactionFilters) => Promise<void>;
   fetchAccountSummary: (accountId: string) => Promise<void>;
   createTransaction: (data: TransactionFormData) => Promise<void>;
   selectAccount: (account: Account) => void;
   
-  // Utility setters
   setLoading: (isLoading: boolean) => void;
   setError: (error: string | null) => void;
 }
@@ -40,7 +38,6 @@ export const useBankStore = create<BankState>()((set, get) => ({
       const data = await apiService.getAccounts();
       set({ accounts: data, isLoading: false });
       
-      // Select first account by default if none is selected
       if (data.length > 0 && !get().selectedAccount) {
         set({ selectedAccount: data[0] });
       }
@@ -86,7 +83,6 @@ export const useBankStore = create<BankState>()((set, get) => ({
     try {
       await apiService.createTransaction(data);
       
-      // Refresh data for the current account
       const { selectedAccount } = get();
       if (selectedAccount) {
         await get().fetchTransactions(selectedAccount.id);

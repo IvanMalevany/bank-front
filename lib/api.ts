@@ -10,38 +10,25 @@ import {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
-/**
- * Handles API requests with proper authorization
- */
 class ApiService {
   private token: string | null = null;
 
   constructor() {
-    // Check for stored token on initialization
     if (typeof window !== 'undefined') {
       this.token = localStorage.getItem('token');
     }
   }
 
-  /**
-   * Set auth token for API requests
-   */
   setToken(token: string): void {
     this.token = token;
     localStorage.setItem('token', token);
   }
 
-  /**
-   * Clear auth token
-   */
   clearToken(): void {
     this.token = null;
     localStorage.removeItem('token');
   }
 
-  /**
-   * Get auth headers for API requests
-   */
   private getHeaders(): HeadersInit {
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
@@ -54,9 +41,6 @@ class ApiService {
     return headers;
   }
 
-  /**
-   * Login user
-   */
   async login(data: LoginFormData): Promise<LoginResponse> {
     const response = await fetch(`${API_URL}/auth/login`, {
       method: 'POST',
@@ -76,9 +60,6 @@ class ApiService {
     return result;
   }
 
-  /**
-   * Get user accounts
-   */
   async getAccounts(): Promise<Account[]> {
     const response = await fetch(`${API_URL}/user/accounts`, {
       headers: this.getHeaders(),
@@ -93,9 +74,6 @@ class ApiService {
     return result;
   }
 
-  /**
-   * Get account summary
-   */
   async getAccountSummary(accountId: string): Promise<AccountSummary> {
     const response = await fetch(`${API_URL}/account/${accountId}/summary`, {
       headers: this.getHeaders(),
@@ -110,9 +88,6 @@ class ApiService {
     return result;
   }
 
-  /**
-   * Get transactions for an account with optional filters
-   */
   async getTransactions(accountId: string, filters?: TransactionFilters): Promise<Transaction[]> {
     let url = `${API_URL}/account/${accountId}/transactions`;
     
@@ -143,9 +118,6 @@ class ApiService {
     return result;
   }
 
-  /**
-   * Create a new transaction
-   */
   async createTransaction(data: TransactionFormData): Promise<Transaction> {
     const response = await fetch(`${API_URL}/transactions`, {
       method: 'POST',

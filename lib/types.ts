@@ -1,4 +1,3 @@
-// User types
 export interface User {
   id: string;
   username: string;
@@ -7,7 +6,6 @@ export interface User {
   lastName: string;
 }
 
-// Account types
 export interface Account {
   id: string;
   userId: string;
@@ -17,7 +15,6 @@ export interface Account {
   accountNumber: string;
 }
 
-// Transaction types
 export type TransactionType = 'expense' | 'income' | 'transfer';
 
 export interface Transaction {
@@ -31,7 +28,6 @@ export interface Transaction {
   type: TransactionType;
 }
 
-// API response types
 export interface LoginResponse {
   user: User;
   token: string;
@@ -52,7 +48,6 @@ export interface AccountSummary extends Account {
   };
 }
 
-// Filter types
 export interface TransactionFilters {
   startDate?: string;
   endDate?: string;
@@ -64,7 +59,6 @@ export interface TransactionFilters {
   sortOrder?: 'asc' | 'desc';
 }
 
-// Form types
 export interface LoginFormData {
   username: string;
   password: string;

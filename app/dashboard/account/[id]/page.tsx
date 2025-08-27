@@ -38,7 +38,6 @@ export default function AccountDetailPage() {
   });
   const [initialized, setInitialized] = useState(false);
 
-  // Initialize data when the component loads
   useEffect(() => {
     const initializeData = async () => {
       try {
@@ -46,7 +45,6 @@ export default function AccountDetailPage() {
           await fetchAccounts();
         }
         
-        // Find the account with the given ID
         const account = accounts.find(acc => acc.id === accountId);
         
         if (account) {
@@ -69,7 +67,6 @@ export default function AccountDetailPage() {
     }
   }, [accountId, accounts, initialized, fetchAccounts, fetchAccountSummary, fetchTransactions, selectAccount, router, currentFilters]);
 
-  // Apply filters to transactions
   const handleApplyFilters = (filters: TransactionFilters) => {
     setCurrentFilters(filters);
     
@@ -78,7 +75,6 @@ export default function AccountDetailPage() {
     }
   };
 
-  // Clear all filters
   const handleClearFilters = () => {
     const defaultFilters: TransactionFilters = {
       sortBy: "date",
@@ -92,7 +88,6 @@ export default function AccountDetailPage() {
     }
   };
 
-  // Add a new transaction
   const handleAddTransaction = async (data: TransactionFormData) => {
     await createTransaction(data);
   };

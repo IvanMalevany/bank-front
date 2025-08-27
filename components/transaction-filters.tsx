@@ -19,7 +19,6 @@ export function TransactionFiltersDialog({ onApplyFilters, onClearFilters }: Tra
   const [open, setOpen] = useState(false);
   const [isFiltersApplied, setIsFiltersApplied] = useState(false);
   
-  // Form state
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [minAmount, setMinAmount] = useState("");
@@ -32,7 +31,6 @@ export function TransactionFiltersDialog({ onApplyFilters, onClearFilters }: Tra
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Build filters object
     const filters: TransactionFilters = {
       sortBy: sortBy as "date" | "amount",
       sortOrder: sortOrder as "asc" | "desc"
@@ -51,7 +49,6 @@ export function TransactionFiltersDialog({ onApplyFilters, onClearFilters }: Tra
   };
 
   const handleClear = () => {
-    // Reset all form fields
     setStartDate("");
     setEndDate("");
     setMinAmount("");

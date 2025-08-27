@@ -9,7 +9,6 @@ type AccountSummaryCardProps = {
 };
 
 export function AccountSummaryCard({ accountSummary }: AccountSummaryCardProps) {
-  // Calculate net flow manually since it's not provided by the backend
   const netFlow = accountSummary.statistics.totalIncome - accountSummary.statistics.totalExpenses;
 
   return (

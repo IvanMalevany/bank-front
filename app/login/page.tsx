@@ -28,7 +28,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-// Form validation schema
 const loginSchema = z.object({
   username: z.string().min(1, { message: "Username is required" }),
   password: z.string().min(1, { message: "Password is required" }),
@@ -39,14 +38,12 @@ export default function LoginPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  // Redirect if already authenticated
   useEffect(() => {
     if (isAuthenticated) {
       router.push("/dashboard");
     }
   }, [isAuthenticated, router]);
 
-  // Initialize form with validation
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -55,7 +52,6 @@ export default function LoginPage() {
     },
   });
 
-  // Handle form submission
   const onSubmit = async (data: z.infer<typeof loginSchema>) => {
     setIsLoading(true);
     

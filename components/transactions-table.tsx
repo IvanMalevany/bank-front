@@ -10,7 +10,6 @@ type TransactionsTableProps = {
 };
 
 export function TransactionsTable({ transactions, accountName }: TransactionsTableProps) {
-  // If no transactions, show empty state
   if (!transactions.length) {
     return (
       <div className="text-center py-8">
@@ -19,22 +18,18 @@ export function TransactionsTable({ transactions, accountName }: TransactionsTab
     );
   }
 
-  // Determine if transaction is income, expense, or transfer
   const getDisplayAmount = (transaction: Transaction): { amount: string; type: TransactionType } => {
     if (transaction.receiver === accountName && transaction.sender !== accountName) {
-      // Income - receiving money from someone else
       return {
         amount: `+${formatCurrency(Math.abs(transaction.amount))}`,
         type: 'income',
       };
     } else if (transaction.sender === accountName && transaction.receiver !== accountName) {
-      // Expense - sending money to someone else
       return {
         amount: `-${formatCurrency(Math.abs(transaction.amount))}`,
         type: 'expense',
       };
     } else {
-      // Transfer - between own accounts or self transaction
       return {
         amount: formatCurrency(transaction.amount),
         type: 'transfer',

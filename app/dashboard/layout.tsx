@@ -14,26 +14,23 @@ export default function DashboardLayout({
   const { user, isAuthenticated, logout } = useAuthStore();
   const router = useRouter();
 
-  // Redirect to login if not authenticated
   useEffect(() => {
     if (!isAuthenticated) {
       router.push("/login");
     }
   }, [isAuthenticated, router]);
 
-  // Handle logout
   const handleLogout = () => {
     logout();
     router.push("/login");
   };
 
   if (!isAuthenticated) {
-    return null; // Don't render anything while checking auth
+    return null;
   }
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Header */}
       <header className="bg-yellow-600 text-white shadow-md">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <div className="flex items-center space-x-2">
@@ -65,12 +62,10 @@ export default function DashboardLayout({
         </div>
       </header>
 
-      {/* Main content */}
       <main className="flex-1 container mx-auto px-4 py-6">
         {children}
       </main>
 
-      {/* Footer */}
       <footer className="bg-gray-100 py-4 border-t">
         <div className="container mx-auto px-4 text-center text-sm text-gray-600">
           <p>© 2024 BeeBank. All rights reserved.</p>
